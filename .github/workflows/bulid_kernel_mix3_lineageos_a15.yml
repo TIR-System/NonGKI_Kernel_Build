@@ -1,4 +1,4 @@
-name: Build Kernel Template Xiaomi Mix3 (lineageos-A15-Official) with KSU and SUSFS
+name: Build Kernel Xiaomi Mix3 (lineageos-A15-Official) with KSU and SUSFS
 on:
   workflow_call:
   workflow_dispatch:
@@ -6,7 +6,7 @@ env:
   HOOK_METHOD: "normal" # manual hook method,can choice vfs and normal.
 
 jobs:
-  build:
+   build:
     name: Build Kernel by ${{ github.actor }}
     runs-on: ubuntu-22.04
     env:
