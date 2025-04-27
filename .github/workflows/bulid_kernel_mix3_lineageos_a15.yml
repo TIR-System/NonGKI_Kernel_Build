@@ -513,9 +513,9 @@ jobs:
         if: env.SUSFS_ENABLE == 'true' && env.SUSFS_FIXED == 'true'
         run: |
           cd $GITHUB_WORKSPACE/device_kernel/
-          cp NonGKI_Kernel_Patches/mix2s_evox_a15/cmdline_fixed.patch ./
-          cp NonGKI_Kernel_Patches/mix2s_evox_a15/task_mmu_fixed.patch ./
-          cp NonGKI_Kernel_Patches/mix2s_evox_a15/fdinfo_fixed.patch ./
+          cp NonGKI_Kernel_Patches/mix3_lineageos_a15/cmdline_fixed.patch ./
+          cp NonGKI_Kernel_Patches/mix3_lineageos_a15/task_mmu_fixed.patch ./
+          cp NonGKI_Kernel_Patches/mix3_lineageos_a15/fdinfo_fixed.patch ./
 
           patch -p1 < cmdline_fixed.patch || true
           patch -p1 < task_mmu_fixed.patch || true
@@ -531,9 +531,8 @@ jobs:
         run: |
           export PATH=$GITHUB_WORKSPACE/clang-custom/bin:$PATH
           cd $GITHUB_WORKSPACE/device_kernel/
-          cat ./arch/arm64/configs/vendor/xiaomi/mi845_defconfig > ./arch/arm64/configs/vendor/xiaomi/perseus_defconfig
-          cat ./arch/arm64/configs/vendor/xiaomi/perseus.config >> ./arch/arm64/configs/vendor/xiaomi/perseus_defconfig
-          make CC="ccache clang" O=out ARCH=arm64 ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.GCC_64 }} ${{ env.GCC_32 }} CROSS_COMPILE=aarch64-linux-gnu- vendor/xiaomi/perseus_defconfig
+          wget https://raw.githubusercontent.com/luyishe/NonGKI_Kernel_Build/refs/heads/main/perseus_defconfig
+          make CC="ccache clang" O=out ARCH=arm64 ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.GCC_64 }} ${{ env.GCC_32 }} CROSS_COMPILE=aarch64-linux-gnu- main/perseus_defconfig
           make -j$(nproc --all) CC="ccache clang" O=out ARCH=arm64 ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.GCC_64 }} ${{ env.GCC_32 }} CROSS_COMPILE=aarch64-linux-gnu-
 
       - name: KPM Patcher (Experiment)
