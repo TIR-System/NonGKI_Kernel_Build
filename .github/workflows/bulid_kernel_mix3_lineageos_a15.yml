@@ -3,10 +3,10 @@ on:
   workflow_call:
   workflow_dispatch:
 env:
-HOOK_METHOD: "normal" # manual hook method,can choice vfs and normal.
+  HOOK_METHOD: "normal" # manual hook method,can choice vfs and normal.
 
 jobs:
-   build:
+  build:
     name: Build Kernel by ${{ github.actor }}
     runs-on: ubuntu-22.04
     env:
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare Configuration
         run: |
-          CONFIG_ENV=$(grep -w "CONFIG_ENV" Profiles/perseus_lineageos_a15.env | head -n 1 | cut -d "=" -f 2)
+          CONFIG_ENV=$(grep -w "CONFIG_ENV" Profiles/polaris_evox_a15.env | head -n 1 | cut -d "=" -f 2)
           CONFIG_LIST=(
               DEVICE_NAME
               DEVICE_CODENAME
@@ -43,6 +43,7 @@ jobs:
 
           )
           ls -al ./
+
 
           for CONFIG in "${CONFIG_LIST[@]}"; do
               if [[ "$CONFIG" == "EXTRA_CMDS" || "$CONFIG" == "CUSTOM_CMDS" ]]; then
