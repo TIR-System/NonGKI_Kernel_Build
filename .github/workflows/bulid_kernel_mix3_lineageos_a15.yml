@@ -735,3 +735,13 @@ jobs:
           name: Kernel-${{ env.PACK_NAME }}
           path: |
             ${{ env.PACK_NAME }}
+
+      - name: Upload Raw Kernel Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kernel-Image-${{ env.DEVICE_CODENAME }}
+          path: |
+            device_kernel/out/arch/arm64/boot/Image*
+            device_kernel/out/arch/arm64/boot/dtbo.img
+            device_kernel/out/arch/arm64/boot/dtb
+            device_kernel/out/arch/arm64/boot/DTB
